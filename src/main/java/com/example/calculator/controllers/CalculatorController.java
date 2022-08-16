@@ -14,25 +14,32 @@ import org.springframework.http.MediaType;
 @CrossOrigin(origins = "*")
 @RestController
 public class CalculatorController {
+
     @RequestMapping(value="/suma" , method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Result suma(@RequestParam(name="num1", required=false, defaultValue = "0") String num1,
-                       @RequestParam(name="num1", required=false, defaultValue = "0") String num2) {
+                        @RequestParam(name="num2", required=false, defaultValue = "0") String num2)
+    {
         Result exported = new Result();
-        try {
-            float castOp1 = Float.parseFloat(num1);
-            float castOp2 = Float.parseFloat(num2);
+        try{
+            float castOp1= Float.parseFloat(num1);
+            float castOp2= Float.parseFloat(num2);
 
-            float internalResult = castOp1 + castOp2;
+            float internalResult = 0;
+            internalResult= castOp1 + castOp2;
+            System.out.println(internalResult);
             exported.setResult(internalResult);
             exported.setStatus("OK");
-        } catch (NumberFormatException ex) {
+        }
+        catch(NumberFormatException ex){
             exported.setStatus("Error: Uno de los operadores no es un numero");
-        } catch (Exception Exgen) {
+        }
+        catch (Exception Exgen){
             exported.setStatus("Error inesperado");
         }
 
         return exported;
     }
+
     //Resta
     @RequestMapping(value="/resta" , method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Result resta(@RequestParam(name="num1", required=false, defaultValue = "0") String num1,
