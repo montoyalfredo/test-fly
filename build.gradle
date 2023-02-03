@@ -8,6 +8,7 @@ plugins {
 
 sonarqube {
 	properties {
+		property "sonar.organization", "quind"
 		property "sonar.host.url", "https://sonarcloud.io"
 		property "sonar.login", "tfo2wmdqjoqekbkwduhwmasij6e5pyrs3j3zi6urof6nqxwq6jsq"
 		property "sonar.sourceEncoding", "UTF-8"
