@@ -29,15 +29,15 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
-        run: ./gradlew build sonar 
+        run: ./gradlew build sonar
+        env:
+         SONAR_TOKEN: tfo2wmdqjoqekbkwduhwmasij6e5pyrs3j3zi6urof6nqxwq6jsq
           
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
          SONAR_TOKEN: tfo2wmdqjoqekbkwduhwmasij6e5pyrs3j3zi6urof6nqxwq6jsq
          SONAR_HOST_URL: https://sonarcloud.io
-
-
 
       - name: script sonar
         run: |
