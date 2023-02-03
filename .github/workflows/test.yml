@@ -30,8 +30,10 @@ jobs:
 
       - name: Execute Gradle build
         run: ./gradlew build sonar
-        env:
-         SONAR_TOKEN: tfo2wmdqjoqekbkwduhwmasij6e5pyrs3j3zi6urof6nqxwq6jsq
+        with:
+          args: >
+            -Dsonar.organization= quind
+            -Dsonar.projectKey= com.example:back-cristian
           
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
