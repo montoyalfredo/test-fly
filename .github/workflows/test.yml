@@ -18,13 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-     # - name: SonarCloud Scan
-     #   uses: sonarsource/sonarcloud-github-action@master
-     #   env:
-     #     SONAR_TOKEN: 4114ccd2d25c49e59397eacc3c9bd4b0f32572b7
-     #     SONAR_HOST_URL: https://sonarcloud.io/project/overview?id=com.example%3Aback-cristian
-          
+
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
         with:
@@ -37,6 +31,12 @@ jobs:
       - name: Execute Gradle build
         run: ./gradlew build 
         
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+         SONAR_TOKEN: 4114ccd2d25c49e59397eacc3c9bd4b0f32572b7
+         SONAR_HOST_URL: https://sonarcloud.io
+                
       - name: script sonar
         run: |
           tree
