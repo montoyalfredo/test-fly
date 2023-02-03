@@ -34,7 +34,9 @@ jobs:
       - name: Gradle Build with Sonarqube
         # You may pin to the exact commit or the version.
         # uses: trideepnag1911/gradle-build-with-sonarqube@c35e2952f05e7e45fd81a774a9abab46f132a306
-        uses: trideepnag1911/gradle-build-with-sonarqube@v1.0       
+        uses: trideepnag1911/gradle-build-with-sonarqube@v1.0
+        env:
+         SONAR_TOKEN: tfo2wmdqjoqekbkwduhwmasij6e5pyrs3j3zi6urof6nqxwq6jsq
           
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
