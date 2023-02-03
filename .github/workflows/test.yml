@@ -44,7 +44,9 @@ jobs:
         timeout-minutes: 300
         env:
          SONAR_TOKEN: 4114ccd2d25c49e59397eacc3c9bd4b0f32572b7        
-
+      - name: script sonar
+        run: |
+          tree
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
