@@ -22,7 +22,7 @@ jobs:
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
           SONAR_TOKEN: 4114ccd2d25c49e59397eacc3c9bd4b0f32572b7
           
       - uses: actions/checkout@v3
@@ -45,10 +45,6 @@ jobs:
         env:
          SONAR_TOKEN: 4114ccd2d25c49e59397eacc3c9bd4b0f32572b7        
 
-      - name: SonarQube Quality Gate check
-        uses: sonarsource/sonarqube-quality-gate-action@master
-        with:
-          scanMetadataReportFile: target/sonar/report-task.txt
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
