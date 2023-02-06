@@ -34,7 +34,7 @@ jobs:
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
-         SONAR_TOKEN: tfo2wmdqjoqekbkwduhwmasij6e5pyrs3j3zi6urof6nqxwq6jsq
+         SONAR_TOKEN: 4114ccd2d25c49e59397eacc3c9bd4b0f32572b7
          SONAR_HOST_URL: https://sonarcloud.io
 
       - name: script sonar
