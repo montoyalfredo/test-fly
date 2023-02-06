@@ -29,7 +29,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
-        run: ./gradlew build sonar -Dsonar.organization=crisnen10 -Dsonar.projectKey=crisnen10_test-fly -Dsonar.login=fbe3bb67032ec47d2e028f1f8fba1ae901986a24
+        run: ./gradlew build sonar -Dsonar.organization=crisnen10 -Dsonar.projectKey=crisnen10_test-fly -Dsonar.login=fbe3bb67032ec47d2e028f1f8fba1ae901986a24 GITHUB_ACTION_PATH:build/sonar/report-task.txt
           
       - name: script sonar
         run: |
