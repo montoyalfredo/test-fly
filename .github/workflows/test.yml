@@ -34,7 +34,7 @@ jobs:
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
-         SONAR_TOKEN: 4114ccd2d25c49e59397eacc3c9bd4b0f32572b7
+         SONAR_TOKEN: fbe3bb67032ec47d2e028f1f8fba1ae901986a24
          SONAR_HOST_URL: https://sonarcloud.io
 
       - name: script sonar
@@ -47,7 +47,7 @@ jobs:
         # Force to fail step after specific time.
         timeout-minutes: 300
         env:
-         SONAR_TOKEN: 4114ccd2d25c49e59397eacc3c9bd4b0f32572b7        
+         SONAR_TOKEN: fbe3bb67032ec47d2e028f1f8fba1ae901986a24      
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
