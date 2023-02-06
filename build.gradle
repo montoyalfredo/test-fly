@@ -8,11 +8,11 @@ plugins {
 
 sonarqube {
 	properties {
-		property "sonar.organization", "quind"
+		property "sonar.organization", "crisnen10"
 		property "sonar.host.url", "https://sonarcloud.io"
-		property "sonar.login", "tfo2wmdqjoqekbkwduhwmasij6e5pyrs3j3zi6urof6nqxwq6jsq"
+		property "sonar.login", "fbe3bb67032ec47d2e028f1f8fba1ae901986a24"
 		property "sonar.sourceEncoding", "UTF-8"
-		property "sonar.projectKey", "com.example:back-cristian"
+		property "sonar.projectKey", "crisnen10_test-fly"
 	}
 }
 group = 'com.example'
