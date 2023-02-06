@@ -48,7 +48,8 @@ jobs:
         # Force to fail step after specific time.
         timeout-minutes: 300
         env:
-         SONAR_TOKEN: fbe3bb67032ec47d2e028f1f8fba1ae901986a24      
+         SONAR_TOKEN: fbe3bb67032ec47d2e028f1f8fba1ae901986a24
+         GITHUB_ACTION_PATH: build/sonar/report-task.txt
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v3
