@@ -29,7 +29,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Execute Gradle build
-        run: ./gradlew build sonar -Dsonar.organization=quind -Dsonar.projectKey=com.example:back-cristian -Dsonar.login=tfo2wmdqjoqekbkwduhwmasij6e5pyrs3j3zi6urof6nqxwq6jsq
+        run: ./gradlew build 
           
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
