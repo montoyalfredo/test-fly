@@ -34,15 +34,12 @@ jobs:
           -Dsonar.projectKey=crisnen10_test-fly 
           -Dsonar.login=fbe3bb67032ec47d2e028f1f8fba1ae901986a24
 
-          
-      - name: script sonar
-        run: |
-          tree
-#      - name: SonarCloud Scan
-#        uses: sonarsource/sonarcloud-github-action@master
-#        env:
-#         SONAR_TOKEN: fbe3bb67032ec47d2e028f1f8fba1ae901986a24
-#         SONAR_HOST_URL: https://sonarcloud.io
+        
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+         SONAR_TOKEN: fbe3bb67032ec47d2e028f1f8fba1ae901986a24
+         SONAR_HOST_URL: https://sonarcloud.io
 
 
 
