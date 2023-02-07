@@ -34,14 +34,6 @@ jobs:
           -Dsonar.projectKey=crisnen10_test-fly 
           -Dsonar.login=fbe3bb67032ec47d2e028f1f8fba1ae901986a24
 
-        
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-         SONAR_TOKEN: fbe3bb67032ec47d2e028f1f8fba1ae901986a24
-         SONAR_HOST_URL: https://sonarcloud.io
-
-
 
       - name: SonarQube Quality Gate check
         id: sonarqube-quality-gate-check
@@ -58,3 +50,10 @@ jobs:
         with:
           name: code-coverage-report
           path: $GITHUB_ACTION_REPOSITORY
+          
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: user/app:latest
+  
