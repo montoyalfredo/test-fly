@@ -51,12 +51,9 @@ jobs:
           name: code-coverage-report
           path: $GITHUB_ACTION_REPOSITORY
           
-      - name: Login to Docker Hub
-        uses: docker/login-action@v2
-        with:
-          username: ASIA4H7BSNKMRQFHXJF2
-          password: IQoJb3JpZ2luX2VjEPX//////////wEaCXVzLWVhc3QtMSJHMEUCIQDBw++FExUA7t49vZ33g2qu4CKt3HYBsJ6VgelJ9I/dGwIgQu5BprvFcsnAFQb3bVDm4Vey+kOYlHDzOfD37ax3l3MqjgMIfhAAGgw4NDE3NDk3ODUyNDEiDNPDDrLhP0PtG84jvCrrApboduaI3VtidsNpvSd1Py7T+rqSI1bjiaZNBlSKsrKQVTLKz7QwEOjgWY6EN7lcXIVLo5b//pteIAePuw3VEEvBnKFwN+fUvrxNhCm1BpHjcQD+TsYnyS3W4RJfsJowVqlZOyWCZ5rYpPICybAjHDqidliTry3GOFJIzg4f4Owg8jIGzOUqIkPOeW3ued3yCGsUdlJqGMFk2jeF8S3oOolNmj48DND+a/pre7rvWbjxRMeGvLBhfVVcC7fPSDXUoLbhJ0Nj0Em8tOt/0nMXWMPQ55U+DY1XkoeOhA4rSMbunEG6LZind4BtVnJYjCiLvA/5UZ6cQ1122TJV6y9iYIeUnkHVfDCDLOTuIHcD859lDLp9Q/yyXun3fW1IwlcR2uWDiUcy4/UTrIFFFXJTNPBLYdi1SrZipxdAZTgW8w17IivB3r/KA5BaZocVTSSXFLtvhkfrZzN8KvcUEiLSjgl3mFojDbTOIw1dzzDekZCfBjqmAa2VVW53/8/RI2g8OnSbjscbyKoRsWgXVFc0hGu+SMOjYMLkeJlgXoqoUSAg03Gyxouorxb+O60JlFcBcQI3Qjv1fty4TVLKNWnNMIaSlqiIOeyCSpjpRYtXXovU1HIIVs8Va+jE0vOii0h85VQ74D1oC5qUQK55aq0aUjQoCMczISVeVTzbl28KZVlXajjntsrbEZPgZiyLWowCkqXB4EYOFy1+bxQ=
-
+      - name: Login to DockerHub Registry
+        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin         
+ 
       - name: login aws
         run: |
           tree
