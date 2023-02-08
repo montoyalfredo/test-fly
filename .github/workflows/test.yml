@@ -53,7 +53,12 @@ jobs:
           
       - name: Login to DockerHub Registry
         run: aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/k6v1j2e7       
- 
+        with:
+          secrets: |
+            export AWS_ACCESS_KEY_ID="ASIA4H7BSNKM55SHW2OY"
+            export AWS_SECRET_ACCESS_KEY="BalYQWIsehcpdP4GLAy/xIqGiQ1zTNgx48hEI6LE"
+            export AWS_SESSION_TOKEN="IQoJb3JpZ2luX2VjEPX//////////wEaCXVzLWVhc3QtMSJGMEQCIA1E02PPlp+85QvJrrLZzDeNWGtTvEZSWllvBoVNG3qHAiBXFmqKXEfdz8g2DCuq60mXZcjTMbk8K6CywGf7aLj1pyqOAwh9EAAaDDg0MTc0OTc4NTI0MSIM5YVdeC7ejP42Cf1PKusCJ8+8aJ+She2kOCrSq8bLrOoTM0tjMR4Xj1b+60z0Vt2mhmlRX9vNv1fLweO1ZgpBjSzBNYnhcfLuKu0lsy52Q+YmMkCEd4Qxa3JqTapaJxcBuLl7Hw586bCAJdAqkBtD3mGjjSJi+TXr+rmFC1O+o9XaBGaOcShgLrFNR0WQwYFBDsKclGRlP2XX/zCxTByDFBdpiA8I/tCEOayjyJwCU3X+cBHkULXnxCsG9oAcOafsjrHyfnyCMJ9mK+XIdyBeW8zgGd9p/xMiOukOV/LPLSKl1jqiNFwRW22jZD0Sq5LUN/5bBhf6PbOQd+RJCyC+5c8+OSp3r/Tyu48uxQyByQpGXnK/kCoiwperxiVzRP7uA72xMC3oObwc2t5TVDE4I6Om9wu7pamy3pamCyY9xyRU9ZhaCGdUbNnMBePhm+PYmiv3D/GWMazre3yjqUa7hfxWRqeVXq9QynbBaS9wvOojx+RcidWIryFIMI+HkJ8GOqcB24KJyLfepXWi/AfUCywoNKWdJr5jbr76qBms5iRs86tL78OVhM7bdiL2z5SXU8kosmv9TecHlBpZ8gMMIbrYkHIF3BxcmamtdfmfFLvAgk0qJXHs6Kcz9/9if6p/r1E5tcEzTs+Wxv0tnD4cWyUXjJZW0aVXS7wPbdIkU3ny+opRkDhN33v0Z9jl+gakPTftIIdksTNWdzkiaInNiye1D3mYzojRWIc="      
+          
       - name: login aws
         run: |
           tree
