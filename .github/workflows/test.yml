@@ -54,8 +54,8 @@ jobs:
         name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: AWS
-          password: public.ecr.aws/k6v1j2e7
+          username: ASIA4H7BSNKMQ5H65G5F
+          password: aVzhnoAJQWbIe8U9TndTFvqQF4Q6U0pwD0kURj9a
  #     - name: login aws
  #       run: |
  #         aws ecr-public get-login-password --profile ECRAccess-841749785241 | docker login --username AWS --password-stdin public.ecr.aws/k6v1j2e7
