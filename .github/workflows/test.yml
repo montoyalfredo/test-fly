@@ -51,9 +51,9 @@ jobs:
           name: code-coverage-report
           path: $GITHUB_ACTION_REPOSITORY
           
-      - name: login aws
-        run: |
-          aws ecr-public get-login-password --profile ECRAccess-841749785241 | docker login --username AWS --password-stdin public.ecr.aws/k6v1j2e7
+ #     - name: login aws
+ #       run: |
+ #         aws ecr-public get-login-password --profile ECRAccess-841749785241 | docker login --username AWS --password-stdin public.ecr.aws/k6v1j2e7
         
       - name: Build and push
         uses: docker/build-push-action@v4
