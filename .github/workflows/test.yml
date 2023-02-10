@@ -56,17 +56,18 @@ jobs:
 #        uses: aws-actions/amazon-ecr-login@v1
 #        with:
 #          registry-type: public
-          
-      - name: login aws
-        run: |
-          tree
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
         with:
           version: v0.10.0
+          
+      - name: login aws
+        run: |
+          docker buildx build --build-context project=build/libs/calculator-0.0.1-SNAPSHOT.jar .
 
       - name: Build and push
-        uses: docker/bake-action@v2
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: public.ecr.aws/k6v1j2e7/test-flypass:1.0.0
