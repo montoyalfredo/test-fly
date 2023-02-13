@@ -48,7 +48,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: buildartifact
-          path: /build
+          path: build
           
   deployment:
     runs-on: ubuntu-latest
