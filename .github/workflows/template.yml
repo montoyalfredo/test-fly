@@ -5,11 +5,11 @@ on:
   workflow_call:
     secrets:
       ecrpassword:
-        required: true
+        required: false
       AWS_ACCESS_KEY:
-        required: true
+        required: false
       AWS_SECRET_ACCESS_KEY:
-        required: true
+        required: false
 
 jobs:
 
@@ -52,6 +52,7 @@ jobs:
           
   deployment:
     runs-on: ubuntu-latest
+    needs: compile
     environment: ecr
     steps:
       - uses: actions/checkout@v3
