@@ -15,6 +15,7 @@ jobs:
 
   deployment:
     runs-on: ubuntu-latest
+    environment: ecr
     steps:
       - uses: actions/checkout@v3
 
