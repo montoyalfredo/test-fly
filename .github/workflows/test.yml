@@ -69,7 +69,7 @@ jobs:
           push: true
           tags: public.ecr.aws/k6v1j2e7/test-flypass:1.0.0
           build-contexts: |
-             project=build/libs/calculator-0.0.1-SNAPSHOT.jar
+             project=build/libs/
 
    #       secrets: |
    #         export AWS_ACCESS_KEY_ID="ASIA4H7BSNKM55SHW2OY"
