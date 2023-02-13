@@ -1,0 +1,100 @@
+
+name: templatetest
+
+on:
+  workflow_call:
+    secrets:
+      ecrpassword:
+        required: true
+      AWS_ACCESS_KEY:
+        required: true
+      AWS_SECRET_ACCESS_KEY
+        required: true
+
+jobs:
+
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/checkout@v3
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
+
+      - name: Execute Gradle build
+        run: ./gradlew build sonar 
+          -Dsonar.organization=crisnen10 
+          -Dsonar.projectKey=crisnen10_test-fly 
+          -Dsonar.login=fbe3bb67032ec47d2e028f1f8fba1ae901986a24
+
+
+      - name: SonarQube Quality Gate check
+        id: sonarqube-quality-gate-check
+        uses: sonarsource/sonarqube-quality-gate-action@master
+        # Force to fail step after specific time.
+        timeout-minutes: 300
+        env:
+         SONAR_TOKEN: fbe3bb67032ec47d2e028f1f8fba1ae901986a24
+        with:
+          scanMetadataReportFile: build/sonar/report-task.txt
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: code-coverage-report
+          path: $GITHUB_ACTION_REPOSITORY
+          
+#      - name: Login to Amazon ECR Public
+#        id: login-ecr-public
+#        uses: aws-actions/amazon-ecr-login@v1
+#        with:
+#          registry-type: public
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        with:
+          version: v0.10.0
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr-public
+        uses: aws-actions/amazon-ecr-login@v1
+        with:
+          registry-type: public
+        #- name: Login to Docker Hub
+        #uses: docker/login-action@v2
+        #with:
+        #  username: AWS
+        #  password: ${{ secrets.ECRPASSWORD }}
+        #env: 
+        #  ecrtoken: ${{ secrets.ecrpassword }}
+
+      #name: Build, tag, and push docker image to Amazon ECR Public
+        #env:
+        #REGISTRY: ${{ steps.login-ecr-public.outputs.registry }}
+        #  REGISTRY_ALIAS: my-ecr-public-registry-alias
+        #  REPOSITORY: test-flypass
+        #  IMAGE_TAG: ${{ github.sha }}
+        #run: |
+        
+        #docker build -t public.ecr.aws/k6v1j2e7/test-flypass:1.0.0 .
+        #  docker push public.ecr.aws/k6v1j2e7/test-flypass:1.0.0
+          
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: public.ecr.aws/k6v1j2e7/test-flypass:1.0.0
+          build-contexts: |
+             project=build/libs/
