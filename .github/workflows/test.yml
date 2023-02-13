@@ -15,3 +15,4 @@ on:
 jobs:
   call-workflow-2-in-local-repo:
     uses: ./.github/workflows/template.yml
+    secrets: inherit
