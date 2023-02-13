@@ -60,6 +60,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: buildartifact
+          path: build
       - run: tree
 #      - name: Login to Amazon ECR Public
 #        id: login-ecr-public
