@@ -28,6 +28,11 @@ jobs:
         with:
           useConfigFile: true
           configFilePath: gitversion.yml
+        
+      - run: |
+          echo $GitVersion_MajorMinorPatch
+          echo $MajorMinorPatch
+
       - uses: actions/setup-java@v3
         with:
           distribution: temurin
