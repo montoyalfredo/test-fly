@@ -11,7 +11,7 @@ on:
     branches: [ "master" ]
 
   workflow_dispatch:
-
+#testing semantic version
 jobs:
   call-workflow-2-in-local-repo:
     uses: ./.github/workflows/template.yml
