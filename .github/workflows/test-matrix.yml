@@ -1,14 +1,7 @@
 name: templatetest
 
 on:
-  workflow_call:
-    secrets:
-      ecrpassword:
-        required: false
-      AWS_ACCESS_KEY:
-        required: false
-      AWS_SECRET_ACCESS_KEY:
-        required: false
+  workflow_dispatch:
 
 jobs:
 
