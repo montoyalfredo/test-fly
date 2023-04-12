@@ -8,7 +8,7 @@ jobs:
   compile:
     strategy:
       matrix:
-        lambdas: ${{ fromJSON(vars.lambdas) }}
+        lambdas: [ ${{ fromJSON(vars.lambdas) }}]
     runs-on: ubuntu-latest
     steps:
       - run: echo ${{ matrix.lambdas }}
