@@ -1,0 +1,21 @@
+name: templatetest
+
+on:
+  workflow_call:
+    secrets:
+      ecrpassword:
+        required: false
+      AWS_ACCESS_KEY:
+        required: false
+      AWS_SECRET_ACCESS_KEY:
+        required: false
+
+jobs:
+
+  compile:
+    strategy:
+      matrix:
+        lambdas: ${{ fromJSON(vars.lambdas) }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo ${{ matrix.lambdas }}
