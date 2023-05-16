@@ -6,4 +6,4 @@ COPY --from=project calculator-0.0.1-SNAPSHOT.jar backcalculator.jar
 ENTRYPOINT ["java","-jar","backcalculator.jar"]
 
 ##123
-##test 4
+##test 6
