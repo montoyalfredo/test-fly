@@ -32,6 +32,7 @@ jobs:
       - run: |
           echo $GitVersion_MajorMinorPatch
           echo $MajorMinorPatch
+          echo $GITHUB_RUN_ID
 
       - uses: actions/setup-java@v3
         with:
