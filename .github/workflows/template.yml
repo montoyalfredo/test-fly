@@ -27,7 +27,7 @@ jobs:
         uses: gittools/actions/gitversion/execute@v0.9.15
         with:
           useConfigFile: true
-          configFilePath: gitversion.yml
+          configFilePath: gitversion-autoincrement.yml
         
       - run: |
           echo $GitVersion_MajorMinorPatch
