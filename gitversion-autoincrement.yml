@@ -13,7 +13,6 @@ branches:
     regex: "^release\\/.+$"
     track-merge-target: true
 
-version-incrementing: Increment
 increment: Patch
 
 filters:
