@@ -22,6 +22,13 @@ jobs:
 
       - run: |
           echo ${{secrets.tests}}
+      - name: Read variable mapping
+        id: read-mapping
+        run: |
+          # Read the variable mapping file into an environment variable
+          export VARIABLE_MAPPING=$(cat variables.json)
+        working-directory: ${{ github.workspace }}
+        
       - name: Replace Variables
         run: |
           replace_variables() {
@@ -30,38 +37,47 @@ jobs:
               # Find all variables in the file
               variables=$(grep -o -E '#{[A-Za-z0-9_]+}#' "$file")
 
-              # Loop through each variable and replace it with the corresponding secret or env variable value
+              # Loop through each variable and replace it with the corresponding secret value
               for variable in $variables; do
                   # Remove the leading and trailing hash symbols
                   var_name=${variable#"#{"}
                   var_name=${var_name%"}#"}
 
-                  # Get the secret or env variable value
-                  if [[ -n "${{ secrets.${var_name} }}" ]]; then
-                      var_value="${{ secrets.${var_name} }}"
-                  elif [[ -n "${{ env.${var_name} }}" ]]; then
-                      var_value="${{ env.${var_name} }}"
-                  else
-                      # Handle the case where the secret or env variable is not found
-                      echo "Warning: Variable '${var_name}' not found in secrets or env."
+                  # Get the secret name from the mapping
+                  secret_name=$(echo "$VARIABLE_MAPPING" | jq -r ".$var_name")
+
+                  if [[ -z "$secret_name" ]]; then
+                      # Handle the case where the variable is not found in the mapping
+                      echo "Warning: Variable '${var_name}' not found in the mapping."
                       continue
                   fi
 
-                  # Escape special characters in the variable value
-                  var_value_escaped=$(echo "$var_value" | sed 's/[\&/]/\\&/g')
+                  # Get the secret value
+                  secret_value="${{ secrets.${secret_name} }}"
 
-                  # Replace the variable with the secret or env variable value
-                  sed -i "s|${variable}|${var_value_escaped}|g" "$file"
+                  if [[ -z "$secret_value" ]]; then
+                      # Handle the case where the secret is not found
+                      echo "Warning: Secret '${secret_name}' not found."
+                      continue
+                  fi
+
+                  # Escape special characters in the secret value
+                  secret_value_escaped=$(echo "$secret_value" | sed 's/[\&/]/\\&/g')
+
+                  # Replace the variable with the secret value
+                  sed -i "s|${variable}|${secret_value_escaped}|g" "$file"
               done
           }
 
-          # Specify the directory path
+          # Specify the directory path as the current working directory
           directory_path="$PWD"
 
           # Find and replace variables in all files within the directory and its subdirectories
           find "$directory_path" -type f -print0 | while IFS= read -r -d '' file; do
               replace_variables "$file"
           done
+        env:
+          VARIABLE_MAPPING: ${{ steps.read-mapping.outputs.VARIABLE_MAPPING }}
           
       - uses: actions/upload-artifact@v3
         with:
