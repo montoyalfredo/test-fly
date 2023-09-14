@@ -12,7 +12,7 @@ replace_variables() {
         # Remove the leading and trailing hash symbols
         var_name=${variable#"#{"}
         var_name=${var_name%"}#"}
-
+        echo Voy a reemplazar: $variable
         # Get the environment variable value
         var_value="${!var_name}"
 
@@ -27,6 +27,7 @@ replace_variables() {
 
         # Replace the variable with the environment variable value
         sed -i "s|${variable}|${var_value_escaped}|g" "$file"
+        echo reemplacé variable $variable
     done
 }
 
