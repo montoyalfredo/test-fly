@@ -28,7 +28,18 @@ jobs:
           # Read the variable mapping file into an environment variable
           export VARIABLE_MAPPING=$(cat variables.json)
         working-directory: ${{ github.workspace }}
-        
+      - name: Set environment variables for secrets
+        run: |
+          # Loop through the variable mapping and set environment variables for secrets
+          for key in $(echo "$VARIABLE_MAPPING" | jq -r "keys[]"); do
+            secret_name=$(echo "$VARIABLE_MAPPING" | jq -r ".$key")
+            if [[ -n "$secret_name" ]]; then
+              echo "::set-env name=$key::${{ secrets.${secret_name} }}"
+            fi
+          done
+        env:
+          VARIABLE_MAPPING: ${{ steps.read-mapping.outputs.VARIABLE_MAPPING }}
+
       - name: Replace Variables
         run: |
           replace_variables() {
@@ -67,8 +78,6 @@ jobs:
           find "$directory_path" -type f -print0 | while IFS= read -r -d '' file; do
               replace_variables "$file"
           done
-        env:
-          VARIABLE_MAPPING: ${{ steps.read-mapping.outputs.VARIABLE_MAPPING }}
           
       - uses: actions/upload-artifact@v3
         with:
