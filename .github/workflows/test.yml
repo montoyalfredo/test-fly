@@ -3,12 +3,12 @@
 name: test
 
 # Controls when the workflow will run
-on:
+on: 
   # Triggers the workflow on push or pull request events but only for the "master" branch
-  push:
-    branches: [ "feature/*","develop","release", "master"]
-  pull_request:
-    branches: [ "master" ]
+  # push:
+  #   branches: [ "feature/*","develop","release", "master"]
+  # pull_request:
+  #   branches: [ "master" ]
 
   workflow_dispatch:
 #testing semantic version
