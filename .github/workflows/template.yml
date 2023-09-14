@@ -31,7 +31,7 @@ jobs:
         
       - name: Replace Variables
         run: |
-            replace_variables() {
+          replace_variables() {
               file="$1"
 
               # Find all variables in the file
