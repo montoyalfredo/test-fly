@@ -22,6 +22,51 @@ jobs:
 
       - run: |
           echo ${{secrets.tests}}
+      - name: Replace Variables
+        run: |
+          replace_variables() {
+              file="$1"
+
+              # Find all variables in the file
+              variables=$(grep -o -E '#{[A-Za-z0-9_]+}#' "$file")
+
+              # Loop through each variable and replace it with the corresponding secret or env variable value
+              for variable in $variables; do
+                  # Remove the leading and trailing hash symbols
+                  var_name=${variable#"#{"}
+                  var_name=${var_name%"}#"}
+
+                  # Get the secret or env variable value
+                  if [[ -n "${{ secrets.${var_name} }}" ]]; then
+                      var_value="${{ secrets.${var_name} }}"
+                  elif [[ -n "${{ env.${var_name} }}" ]]; then
+                      var_value="${{ env.${var_name} }}"
+                  else
+                      # Handle the case where the secret or env variable is not found
+                      echo "Warning: Variable '${var_name}' not found in secrets or env."
+                      continue
+                  fi
+
+                  # Escape special characters in the variable value
+                  var_value_escaped=$(echo "$var_value" | sed 's/[\&/]/\\&/g')
+
+                  # Replace the variable with the secret or env variable value
+                  sed -i "s|${variable}|${var_value_escaped}|g" "$file"
+              done
+          }
+
+          # Specify the directory path
+          directory_path="$PWD"
+
+          # Find and replace variables in all files within the directory and its subdirectories
+          find "$directory_path" -type f -print0 | while IFS= read -r -d '' file; do
+              replace_variables "$file"
+          done
+          
+      - uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: test.txt
 #       - name: Install GitVersion
 #         uses: gittools/actions/gitversion/setup@v0.9.15
 #         with:
